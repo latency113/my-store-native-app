@@ -1,27 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import ProductCard from './components/ProductCard';
 import product from './data';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text className='text-red-500 text-xl'>Open up App.tsx to start working on your app!</Text>
-      <ScrollView className='flex-1 p-4'>
+    <SafeAreaView className="flex-1 bg-gray-50">
+      <StatusBar style="dark" />
+      
+      {/* Header */}
+      <View className="bg-white px-4 py-4 border-b border-gray-200">
+        <Text className="text-2xl font-bold text-gray-900 font-sans">สินค้าแนะนำ</Text>
+        <Text className="text-sm text-gray-500 mt-1 font-sans">
+          {product.length} รายการ
+        </Text>
+      </View>
+
+      {/* Product Grid */}
+      <ScrollView 
+        className="flex-1"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
         {product.map((p) => (
-          <ProductCard Key={p.id} {...p}
-          onPress={()=> Alert.alert('Click', p.name)} />
+          <ProductCard 
+            key={p.id} 
+            {...p}
+            onPress={() => Alert.alert('สินค้า', p.name)} 
+          />
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  scrollContent: {
+    paddingTop: 16,
+    paddingBottom: 24,
   },
 });
