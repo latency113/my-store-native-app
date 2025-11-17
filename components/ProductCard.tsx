@@ -16,9 +16,7 @@ const ProductCard = (props: any) => {
                 </View>
             </View>
         </TouchableOpacity>
-        
     )
-
 }
 
 export default ProductCard
